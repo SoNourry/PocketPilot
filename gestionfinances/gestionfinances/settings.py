@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'gestionfinances.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'pocketpilot',
+        'USER': 'monuser',  
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',     
     }
 }
 
