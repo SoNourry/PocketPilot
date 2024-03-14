@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    {% if user.is_authenticated %}
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center mb-5">
+            <h1 class="mb-3">Tableau de Bord</h1>
+            <p>Bienvenue, {{ user.username }} ! Explorez votre gestion financière.</p>
+        </div>
+    </div>
+    <!-- Ajoutez ici le contenu spécifique aux utilisateurs connectés -->
+    <div class="row">
+        <!-- Exemples d'éléments de tableau de bord de l'utilisateur -->
+    </div>
+    {% else %}
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center mb-5">
+            <h1 class="mb-3">Gestion Financière</h1>
+            <p>Bienvenue sur votre plateforme de gestion financière. Connectez-vous pour commencer.</p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            <a href="{% url 'login' %}" class="btn btn-primary">Se connecter</a>
+            <div class="mt-3">
+                Pas de compte ? <a href="{% url 'signup' %}">Créez un compte.</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -5,14 +5,17 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <h5 class="card-header">Se connecter</h5>
+                <h5 class="card-header">Inscription</h5>
                 <div class="card-body">
                     <form method="post" class="needs-validation" novalidate>
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <button type="submit" class="btn btn-primary">Connexion</button>
+                        <button type="submit" class="btn btn-primary">S'inscrire</button>
                     </form>
                 </div>
+            </div>
+            <div class="text-center mt-3">
+                Vous avez déjà un compte ? <a href="{% url 'login' %}">Se connecter</a>
             </div>
         </div>
     </div>
