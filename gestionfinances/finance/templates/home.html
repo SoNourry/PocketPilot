@@ -9,9 +9,17 @@
             <p>Bienvenue, {{ user.username }} ! Explorez votre gestion financière.</p>
         </div>
     </div>
-    <!-- Ajoutez ici le contenu spécifique aux utilisateurs connectés -->
     <div class="row">
-        <!-- Exemples d'éléments de tableau de bord de l'utilisateur -->
+        <div class="mt-3">
+                <a href="{% url 'add_budget' %}">Ajouter un budget</a>
+            </div>
+        <h2>Mes budgets</2>
+            {% for budget in budgets %}
+                <div>
+                    <h2>{{ budget.category.name }}</h2>
+                    <p>Budget: {{ budget.amount }}</p>
+                </div>
+            {% endfor %}
     </div>
     {% else %}
     <div class="row justify-content-center">
