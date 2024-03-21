@@ -1,7 +1,7 @@
 from enum import Enum
 from django.db import models
-from .category import Category
 from django.conf import settings
+from .budget import Budget
 
 
 class TransactionType(Enum):
@@ -11,7 +11,13 @@ class TransactionType(Enum):
 
 class Transaction(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    budget = models.ForeignKey(
+        Budget,
+        on_delete=models.CASCADE,
+        related_name="transactions",
+        null=True,
+        blank=True,
+    )
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField()
     description = models.TextField(blank=True, null=True)

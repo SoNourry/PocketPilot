@@ -1,41 +1,82 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    .bg-violet {
+        background-color: #6f42c1 !important; /* Une nuance spécifique de violet */
+    }
+    .btn-violet {
+        background-color: #6f42c1;
+        color: #ffffff;
+        border-color: #643bad;
+    }
+    .btn-violet:hover {
+        background-color: #643bad;
+        border-color: #5a32a3;
+    }
+    .text-violet {
+        color: #6f42c1 !important;
+    }
+</style>
+
 <div class="container mt-5">
     {% if user.is_authenticated %}
-    <div class="row justify-content-center">
-        <div class="col-md-6 text-center mb-5">
-            <h1 class="mb-3">Tableau de Bord</h1>
-            <p>Bienvenue, {{ user.username }} ! Explorez votre gestion financière.</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="mt-3">
-                <a href="{% url 'add_budget' %}">Ajouter un budget</a>
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center mb-5">
+                <h1 class="mb-3 text-violet">Tableau de Bord</h1>
+                <p class="lead">Bienvenue, {{ user.username }} ! Explorez votre gestion financière.</p>
+                <a href="{% url 'add_budget' %}" class="btn btn-violet btn-lg my-3">
+                    <i class="bi bi-plus-lg"></i> Ajouter un budget
+                </a>
             </div>
-        <h2>Mes budgets</2>
-            {% for budget in budgets %}
-                <div>
-                    <h2>{{ budget.category.name }}</h2>
-                    <p>Budget: {{ budget.amount }}</p>
+        </div>
+        {% if budgets %}
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for budget in budgets %}
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-header bg-violet text-white">
+                                <h5 class="card-title">{{ budget.category }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text"><strong>Budget :</strong> {{ budget.amount }} €</p>
+                                <p class="card-text"><strong>Période :</strong> {{ budget.start_date }} au {{ budget.end_date }}</p>
+                                <p class="card-text"><strong>Description :</strong> {{ budget.description|default:"Aucune description disponible." }}</p>
+                            </div>
+                            <div class="card-footer bg-white">
+                                <a href="" class="btn btn-warning btn-sm">
+                                    <i class="bi bi-pencil-square"></i> Modifier
+                                </a>
+                                <a href="" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i> Supprimer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center mb-4">
+                    <p>Aucun budget n'a été ajouté pour le moment.</p>
                 </div>
-            {% endfor %}
-    </div>
+            </div>
+        {% endif %}
     {% else %}
-    <div class="row justify-content-center">
-        <div class="col-md-6 text-center mb-5">
-            <h1 class="mb-3">Gestion Financière</h1>
-            <p>Bienvenue sur votre plateforme de gestion financière. Connectez-vous pour commencer.</p>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-md-4 text-center">
-            <a href="{% url 'login' %}" class="btn btn-primary">Se connecter</a>
-            <div class="mt-3">
-                Pas de compte ? <a href="{% url 'signup' %}">Créez un compte.</a>
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h1 class="mb-3">Gestion Financière</h1>
+                <p>Bienvenue sur votre plateforme de gestion financière. Connectez-vous pour commencer.</p>
             </div>
         </div>
-    </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4 text-center">
+                <a href="{% url 'login' %}" class="btn btn-violet">Se connecter</a>
+                <div class="mt-3">
+                    Pas de compte ? <a href="{% url 'signup' %}" class="text-violet">Créez un compte.</a>
+                </div>
+            </div>
+        </div>
     {% endif %}
 </div>
 {% endblock %}

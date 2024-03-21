@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
 from finance import views
@@ -29,4 +29,5 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("signup/", views.signup, name="signup"),
     path("add_budget/", views.add_budget, name="add_budget"),
+    path("profile/", views.profile, name="profile"),
 ]

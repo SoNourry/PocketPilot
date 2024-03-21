@@ -1,6 +1,4 @@
-from enum import Enum
 from django.db import models
-from .category import Category
 from django.conf import settings
 
 FREQUENCY_CHOICES = (
@@ -13,7 +11,6 @@ FREQUENCY_CHOICES = (
 
 class RecurringExpense(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     frequency = models.CharField(
         max_length=50,

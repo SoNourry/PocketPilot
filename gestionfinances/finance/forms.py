@@ -22,7 +22,7 @@ class SignUpForm(UserCreationForm):
 class TransactionForm(forms.ModelForm):
     class Meta:
         model = Transaction
-        fields = ["category", "amount", "date", "description", "type"]
+        fields = ["amount", "date", "description", "type"]
 
 
 class BudgetForm(forms.ModelForm):

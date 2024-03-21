@@ -1,11 +1,39 @@
+from enum import Enum
 from django.db import models
-from .category import Category
 from django.conf import settings
+
+
+class CategoryName(Enum):
+    ALIMENTATION = "Alimentation"
+    LOISIRS = "Loisirs"
+    TRANSPORT = "Transport"
+    LOGEMENT = "Logement"
+    SANTE = "Santé"
+    EDUCATION = "Éducation"
+    DIVERS = "Divers"
+    EPARGNE = "Épargne"
+    INVESTISSEMENTS = "Investissements"
+    ASSURANCES = "Assurances"
+    UTILITES = "Utilités"  # Electricity, water, internet
+    VETEMENTS = "Vêtements"
+    CADEAUX = "Cadeaux"
+    VOYAGES = "Voyages"
+    REMBOURSEMENT = "Remboursement"
+    BEAUTE = "Beauté"
+    SPORT = "Sport"
+    TECHNOLOGIE = "Technologie"
+    RESTAURANTS = "Restaurants"
+    ANIMAUX = "Animaux"
+    LOYER = "Loyer"
 
 
 class Budget(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.CharField(
+        max_length=50,
+        choices=[(tag.name, tag.value) for tag in CategoryName],
+        unique=True,
+    )
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 
     # These fields define the validity period of the budget.

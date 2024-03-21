@@ -15,7 +15,14 @@ def home(request):
         budgets = Budget.objects.filter(user=request.user)
     else:
         budgets = None
-    return render(request, "home.html", {"budget": budgets})
+    return render(request, "home.html", {"budgets": budgets})
+
+
+@login_required
+def profile(request):
+    budgets = Budget.objects.filter(user=request.user)
+
+    return render(request, "profile.html", {"budgets": budgets})
 
 
 def signup(request):
